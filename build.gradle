@@ -4,9 +4,13 @@ plugins {
 node {
   download = true
 }
+//declare a build task
 task build
+
+//declare a task to create a zip of the app
 task zip(type:Zip) {
   from ('.') {
+    include "*"
     include "bin/**"
     include "data/**"
     include "done_modules/**"
@@ -17,6 +21,8 @@ task zip(type:Zip) {
   destinationDir(file("dist"))
   baseName "trainSchedule"
 }
+
+//declare task dependencies
 build.dependsOn zip
 zip.dependsOn npm_build
 build.dependsOn npm_build
